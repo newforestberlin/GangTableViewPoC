@@ -10,16 +10,50 @@ import UIKit
 
 class ViewController: UIViewController {
 
+	@IBOutlet weak private var tableView: GangTableView!
+	private let items: [[Any]] = [[
+		CellItem(text: "Row One"),
+		CellItem(text: "Row Two"),
+		CellItem(text: "Row Three"),
+		CellItem(text: "Row Four")
+		]]
+
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+
+		setupTableView()
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	func setupTableView() {
+		
+		tableView.setupSections(sectionCount: 1)
+		tableView.sections = items
+
+		tableView.onIdentifyCell = { data in
+
+			switch data {
+			case is CellItem:
+				return "TableCell"
+			default:
+				return nil
+			}
+		}
+
+		tableView.onConfigure = { context in
+
+			print(context.cell)
+			print(context.data)
+			print(context.indexPath)
+		}
+
+		tableView.onSelect = { context in
+
+			print(context.cell)
+			print(context.data)
+			print(context.indexPath)
+		}
 	}
-
-
 }
+
 
