@@ -191,7 +191,7 @@ extension GangTableView: UITableViewDataSource {
         
         let data = sections[indexPath.section][indexPath.row]
 
-		if let identifier = onIdentify?(data: data) {
+		if let identifier = onIdentifyCell?(data: data) {
 //        if let identifier = tableViewDataSource?.cellIdentifier(forData: data) {
 
             if registeredIdentifiers.contains(identifier) == false {
